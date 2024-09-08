@@ -17,7 +17,7 @@ EComponentType str_hash(std::string const& p_string) {
     else if (p_string == "and") return AND_GATE;
     else if (p_string == "or") return OR_GATE;
     else if (p_string == "xor") return XOR_GATE;
-    else return TYPE_UNDEFINED
+    else return TYPE_UNDEFINED;
 }
 
 // Components are the building blocks of circuits
