@@ -1,5 +1,8 @@
 #include <Component.hpp>
 
+#include <iostream>
+#include <string>
+
 C_Component::C_Component(EComponentType p_type) {
     mode = p_type;
 
@@ -32,7 +35,7 @@ C_Component::C_Component(EComponentType p_type) {
 
 // --------------------
 
-void C_Component::connect_output_to_component_input(C_Component *p_component, int p_input_index = 0) {
+void C_Component::connect_output_to_component_input(C_Component *p_component, int p_input_index) {
     connected_components.push_back(p_component);
     connection_input_indices.push_back(p_input_index);
     connection_count++;
@@ -42,6 +45,7 @@ void C_Component::connect_output_to_component_input(C_Component *p_component, in
 
 void C_Component::drive_input(int p_input_index, ELogicLevel p_logic_level) {
     input_values[p_input_index] = p_logic_level;
+    recalculate_output();
 }
 
 // --------------------
