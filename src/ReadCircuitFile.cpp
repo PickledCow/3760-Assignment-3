@@ -2,11 +2,23 @@
 // Additional components are currently limited to 10 inputs max and 1 output.
 //
 // Current supported functions are:
-// add: 		Adds a new component to the simulation
-// connect: 	Connects two components output and input given component names and index
-// drive: 		Manually sets the value of a component input
-// query:		Reads and prints the output of a requested component
-// Copyright (c) Donald Dansereau, 2023
+// add <type> <name>
+//		Adds a new component to the simulation with the requested type and name
+//
+// connect <output component name> <input component name> <input index>
+//		Connects two components output and input given component names and index
+//
+// drive <component name> <logic value>
+//		Manually sets the value of a component input
+//
+// query <component name>
+//		Reads and prints the output of a requested component
+//
+// end
+//		Ends the simulation and closes the program
+// 
+//
+// Copyright (c) Donald Dansereau, 2023; Joon Suh, 2024
 
 
 #include <iostream>
@@ -15,35 +27,27 @@
 #include <Component.hpp>
 #include <Circuit.hpp>
 
-// Forwards definition of helper functions
-
-// Helper function for converting a string to ELogicLevel
-ELogicLevel hash_logic_level(std::string const& p_string);
-
-// Helper function for converting a string to EComponentType
-EComponentType hash_gate_type(std::string const& p_string);
-
 // Main loop
 int main() {
 	C_Circuit circuit = C_Circuit();
 	while (true) {
 		std::string Request;
 		std::cin >> Request;  // get the next word from the input stream
-		//std::cout << "Processing input token: " << Request << std::endl;
 
 		if (Request[0] == '#') {
 			// a comment line
 			// get the rest of the line and ignore it
 			std::string DummyVar;
 			getline( std::cin, DummyVar );
-		} else if (Request.compare( "add" ) == 0 ) {
+
+		} else if (Request.compare( "add" ) == 0 ) { 
 			std::string GateType;
 			std::string GateName;
 			std::cin >> GateType;
 			std::cin >> GateName;
 			std::cout << "Adding gate of type " << GateType << " named " << GateName << std::endl;
 
-			C_Component* component = new C_Component(hash_gate_type(GateType));
+			C_Component* component = new C_Component(circuit.convert_gate_type(GateType));
 			
 			circuit.add_component(component, GateName);
 
@@ -73,7 +77,7 @@ int main() {
 			std::cin >> DriveLevelString;
 
 			int inputIndex = InputIndexString[0] - '0';
-			ELogicLevel driveLevel = hash_logic_level(DriveLevelString);
+			ELogicLevel driveLevel = circuit.convert_logic_level(DriveLevelString);
 
 			circuit.drive_compontent_input(GateName, inputIndex, driveLevel);
 
@@ -116,22 +120,4 @@ int main() {
 	}
   
   return 0;
-}
-
-
-// Helper function implementations
-
-ELogicLevel hash_logic_level(std::string const& p_string) {
-    if (p_string == "LOW") return LOGIC_LOW;
-    else if (p_string == "HIGH") return LOGIC_HIGH;
-    else return LOGIC_UNDEFINED;
-}
-
-EComponentType hash_gate_type(std::string const& p_string) {
-    if (p_string == "wire") return WIRE;
-    else if (p_string == "not") return NOT_GATE;
-    else if (p_string == "and") return AND_GATE;
-    else if (p_string == "or") return OR_GATE;
-    else if (p_string == "xor") return XOR_GATE;
-    else return TYPE_UNDEFINED;
 }

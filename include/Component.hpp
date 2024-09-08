@@ -25,7 +25,7 @@ class C_Component {
     
     // Reports the current output value of a specific output pin
     ELogicLevel get_output();
-
+    
     protected:
     // Update the output value with respect to the current input values
     void recalculate_output();
