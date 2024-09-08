@@ -107,8 +107,13 @@ void C_Component::recalculate_output() {
     drive_output();
 }
 
+// --------------------
+
+
 void C_Component::drive_output() {
     for (int i = 0; i < connection_count; ++i) {
         connected_components[i]->drive_input(connection_input_indices[i], output_value);
     }
 }
+
+// --------------------

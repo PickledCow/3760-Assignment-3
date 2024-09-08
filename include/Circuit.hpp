@@ -23,12 +23,6 @@ class C_Circuit {
     // Returns the current output value of a component given its stringname
     ELogicLevel get_component_output(std::string p_name);
 
-    // Helper function for converting between user strings and ELogicLevel
-    ELogicLevel convert_logic_level(std::string const& p_string);
-
-    // Helper function for converting between user strings and EComponentType
-    EComponentType convert_gate_type(std::string const& p_string);
-    
     private:
     // Internal function for getting the C_Component object pointer from a stringname
     C_Component* get_component_from_string(std::string p_name);

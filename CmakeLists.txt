@@ -13,5 +13,6 @@ include_directories(
 add_executable( CircuitSimulator
     src/Circuit.cpp
     src/Component.cpp
-    src/ReadCircuitFile.cpp
+    src/Interpreter.cpp
+    src/Main.cpp
 )
