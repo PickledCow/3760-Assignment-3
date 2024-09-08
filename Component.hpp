@@ -13,7 +13,8 @@ enum EComponentType { TYPE_UNDEFINED = -1, WIRE, NOT_GATE, AND_GATE, OR_GATE, XO
 
 // Helper function for converting a string to EComponentType
 EComponentType str_hash(std::string const& p_string) {
-    if (p_string == "not") return NOT_GATE;
+    if (p_string == "wire") return WIRE;
+    else if (p_string == "not") return NOT_GATE;
     else if (p_string == "and") return AND_GATE;
     else if (p_string == "or") return OR_GATE;
     else if (p_string == "xor") return XOR_GATE;
