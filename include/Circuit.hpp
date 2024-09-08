@@ -2,7 +2,7 @@
 #define CIRCUIT_H
 
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <string>
 
 #include <Component.hpp>
@@ -23,7 +23,7 @@ class C_Circuit {
 
     int component_count = 0;
     std::vector<C_Component*> components;
-    std::map<std::string, int> component_index_map;
+    std::unordered_map<std::string, int> component_index_map;
 };
 
 #endif
