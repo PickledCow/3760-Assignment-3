@@ -1,8 +1,5 @@
 #include <Component.hpp>
 
-#include <iostream>
-#include <string>
-
 C_Component::C_Component(EComponentType p_type) {
     mode = p_type;
 
