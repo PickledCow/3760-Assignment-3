@@ -1,0 +1,84 @@
+# A 1-bit full adder
+
+# Initialise the gates to use
+add xor xor1
+add xor xor2
+add and and1
+add and and2
+add or or1
+
+# Initialise wires for ease of reading inputs and outputs
+add wire A
+add wire B
+add wire CarryIn
+add wire Sum
+add wire CarryOut
+
+# Make the connections
+connect A xor1 0
+connect A and2 1
+connect B xor1 1
+connect B and2 0
+connect CarryIn xor2 1
+connect CarryIn and1 0
+
+connect xor1 xor2 0
+connect xor1 and1 1
+
+connect and1 or1 0
+connect and2 or1 1
+
+# Make the output connections
+connect xor2 Sum 0
+connect or1 CarryOut 0
+
+# Test input values
+drive A 0 LOW
+drive B 0 LOW
+drive CarryIn 0 LOW
+query Sum
+query CarryOut
+
+drive A 0 LOW
+drive B 0 HIGH
+drive CarryIn 0 LOW
+query Sum
+query CarryOut
+
+drive A 0 HIGH
+drive B 0 LOW
+drive CarryIn 0 LOW
+query Sum
+query CarryOut
+
+drive A 0 HIGH
+drive B 0 HIGH
+drive CarryIn 0 LOW
+query Sum
+query CarryOut
+
+drive A 0 LOW
+drive B 0 LOW
+drive CarryIn 0 HIGH
+query Sum
+query CarryOut
+
+drive A 0 LOW
+drive B 0 HIGH
+drive CarryIn 0 HIGH
+query Sum
+query CarryOut
+
+drive A 0 HIGH
+drive B 0 LOW
+drive CarryIn 0 HIGH
+query Sum
+query CarryOut
+
+drive A 0 HIGH
+drive B 0 HIGH
+drive CarryIn 0 HIGH
+query Sum
+query CarryOut
+
+end

@@ -1,0 +1,62 @@
+# A 1-bit comparator
+
+# Initialise the gates to use
+add not not1
+add not not2
+add and and1
+add and and2
+add or or1
+add not not3
+
+# Initialise wires for ease of reading inputs and outputs
+add wire A
+add wire B
+add wire Less
+add wire Equal
+add wire Greater
+
+# Make the connections
+connect A not1 0
+connect A and2 0
+connect B not2 0
+connect B and1 1
+
+connect not1 and1 0
+connect not2 and2 1
+
+connect and1 or1 0
+connect and2 or1 1
+
+connect or1 not3 0
+
+# Make the output connections
+connect and1 Less 0
+connect and2 Greater 0
+connect not3 Equal 0
+
+# Test input values
+drive A 0 LOW
+drive B 0 LOW
+query Less
+query Equal
+query Greater
+
+drive A 0 LOW
+drive B 0 HIGH
+query Less
+query Equal
+query Greater
+
+drive A 0 HIGH
+drive B 0 LOW
+query Less
+query Equal
+query Greater
+
+drive A 0 HIGH
+drive B 0 HIGH
+query Less
+query Equal
+query Greater
+
+end
